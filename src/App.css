@@ -1,0 +1,204 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #e6e6e6;
+}
+
+.App {
+  max-width: 720px;
+  height: 100%;
+  margin: 0 auto;
+
+  background: #e6e6e6;
+  padding: 4px;
+}
+
+.Post {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  background: #fafafa;
+
+  border-bottom: 6px solid #e6e6e6;
+
+  cursor: pointer;
+}
+
+.PostData {
+  flex: 1 1 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 16px;
+}
+
+.PostData > * {
+  margin-bottom: 4px;
+}
+
+.PostData > :last-child {
+  margin-bottom: 0;
+}
+
+.PostData:hover {
+  background: #f2f2f2;
+}
+
+.Post:last-of-type {
+  border-bottom: none;
+}
+
+.PostData a {
+  color: #1a1a1a;
+  text-decoration: none;
+
+  font-size: 1.1em;
+}
+
+.PostData aside {
+  color: #6a6a6a;
+}
+
+.CommentButton {
+  width: 64px;
+
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.CommentButton:hover,
+.PostData:hover + .CommentButton {
+  background: #f2f2f2;
+}
+
+.CommentButton a {
+  display: block;
+  margin: auto;
+
+  color: #999;
+  font-size: 2em;
+  padding-top: 6px;
+}
+
+.CommentButton:hover a {
+  color: #333;
+}
+
+.Reply {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  background: #fafafa;
+
+  /* border: 1px solid #dddddd; */
+  border-top: none;
+  border-bottom: none;
+
+  cursor: pointer;
+}
+
+.Reply:not(.Top) {
+  background: #f3f3f3;
+}
+
+.ReplyData {
+  flex: 1 1 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 16px 16px;
+}
+
+.ReplyData:not(.Children) {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.ReplyData.First {
+  border-top: 1px solid #e6e6e6;
+}
+
+.ReplyData > * {
+  margin-bottom: 4px;
+}
+
+.ReplyData > :last-child {
+  margin-bottom: 0;
+}
+
+.Reply:hover {
+  background: #f2f2f2;
+}
+
+.Reply:last-of-type {
+  border-bottom: none;
+}
+
+.ReplyData {
+  overflow: hidden;
+}
+
+article .md a {
+  text-decoration: none;
+}
+
+article .md aside {
+  color: #6a6a6a;
+}
+
+article .md p {
+  display: block;
+  margin: 0;
+}
+
+article .md blockquote {
+  margin: 0;
+  padding: 0;
+  padding-left: 8px;
+  margin-left: 1.5px !important;
+  border-left: 4px solid #dfdfdf;
+}
+
+article .md ol,
+article .md ul {
+  margin-left: 0;
+  padding-left: 16px;
+}
+
+article .md > * {
+  margin: 0;
+  margin-bottom: 12px !important;
+  line-height: 1.5em;
+
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  overflow-x: auto;
+}
+
+article .md > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.Indent {
+  width: 6px;
+  background: #e6e6e6;
+}
+
+.Collapsed {
+  height: 6px;
+  background: #e6e6e6;
+
+  border-top: none;
+}
+
+.Collapsed + .Collapsed {
+  display: none;
+}
