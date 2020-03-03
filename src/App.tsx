@@ -1,8 +1,7 @@
-import React from "react";
+import * as React from "react";
 import "./App.css";
 import { useSubreddit, Post, usePost, Reply } from "./reddit/reddit";
 import { useUrl } from "./reddit/url";
-import { realpathSync } from "fs";
 
 function App() {
   const { subreddit, article } = useUrl();
