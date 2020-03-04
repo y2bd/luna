@@ -37,7 +37,7 @@ const PostView: React.FC<Post> = post => {
       evt.stopPropagation();
       goToArticle(subreddit!, id);
     },
-    []
+    [subreddit, id]
   );
 
   const onLinkClick = React.useCallback(
