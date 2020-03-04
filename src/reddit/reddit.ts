@@ -76,11 +76,14 @@ export function useSubreddit(subreddit: string, sort: Sort = Sort.Best) {
       return;
     }
 
+    console.log("acc", accessToken);
+
     fetch(`https://oauth.reddit.com/r/${subreddit}/${sort}.json?raw_json=1`, {
       headers: {
         Authorization: "bearer " + accessToken,
         "User-Agent": "web:me.y2bd.luna:v0.1.0 (by /u/y2bd)"
-      }
+      },
+      method: "GET"
     })
       .then(response => response.json())
       .then((json: PostListing) => {

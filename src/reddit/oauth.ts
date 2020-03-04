@@ -12,8 +12,7 @@ export function useOAuth() {
       method: "POST",
       body: form,
       headers: {
-        Authorization: "Basic RDVOdkpIcmN0UFNFTWc6",
-        "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
+        Authorization: "Basic RDVOdkpIcmN0UFNFTWc6"
       }
     })
       .then(response => response.json())
