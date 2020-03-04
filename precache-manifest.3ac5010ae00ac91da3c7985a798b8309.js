@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1a6f72dc8b4848260ab74c9e916eaffd",
+    "revision": "134f2bf8b655841aa5366207a90afc0c",
     "url": "/luna/index.html"
   },
   {
-    "revision": "4feb1d1a41f79d003e09",
+    "revision": "d1394906d1368c977f4b",
     "url": "/luna/static/css/main.82965868.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/luna/static/js/2.4fecef14.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4feb1d1a41f79d003e09",
-    "url": "/luna/static/js/main.7cbc6192.chunk.js"
+    "revision": "d1394906d1368c977f4b",
+    "url": "/luna/static/js/main.c82e2eb4.chunk.js"
   },
   {
     "revision": "a7cea39e3d539760654a",
