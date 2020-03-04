@@ -80,11 +80,10 @@ export function useSubreddit(subreddit: string, sort: Sort = Sort.Hot) {
     console.log("acc", accessToken);
 
     fetch(
-      `https://oauth.reddit.com/r/${subreddit}/${sort}.json?api_type=json&raw_json=1`,
+      `https://oauth.reddit.com/r/${subreddit}/${sort}?api_type=json&raw_json=1`,
       {
         headers: {
           Authorization: "bearer " + accessToken,
-          "Access-Control-Allow-Origin": "*",
           "User-Agent": "web:me.y2bd.luna:v0.1.0 (by /u/y2bd)"
         },
         method: "GET"
@@ -119,12 +118,13 @@ export function usePost(subreddit: string, article: string) {
     }
 
     fetch(
-      `https://oauth.reddit.com/r/${subreddit}/comments/${article}.json?api_type=json&raw_json=1`,
+      `https://oauth.reddit.com/r/${subreddit}/comments/${article}?comment=&api_type=json&raw_json=1`,
       {
         headers: {
           Authorization: "bearer " + accessToken,
           "User-Agent": "web:me.y2bd.luna:v0.1.0 (by /u/y2bd)"
-        }
+        },
+        credentials: "include"
       }
     )
       .then(response => response.json())
