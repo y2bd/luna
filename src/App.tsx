@@ -20,7 +20,7 @@ const PostsView: React.FC<{ subreddit: string }> = ({ subreddit }) => {
   return (
     <div className="App">
       {loading && <p>Loading...</p>}
-      {error && <p>Error Whoops... {error.message}</p>}
+      {error && <p>Errora Whoops... {error.message}</p>}
       {posts && posts.map(post => <PostView key={post.data.id} {...post} />)}
     </div>
   );
@@ -93,7 +93,7 @@ const RepliesView: React.FC<{ subreddit: string; article: string }> = ({
   return (
     <div className="App">
       {loading && <p>Loading...</p>}
-      {error && <p>Error Whoops... {error.message}</p>}
+      {error && <p>Errora Whoops... {error.message}</p>}
       {post && <PostView expanded {...post} />}
       {replies &&
         replies.map(reply => (

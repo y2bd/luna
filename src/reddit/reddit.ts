@@ -61,10 +61,11 @@ export interface Reply {
 
 export enum Sort {
   Best = "best",
+  Hot = "hot",
   New = "new"
 }
 
-export function useSubreddit(subreddit: string, sort: Sort = Sort.Best) {
+export function useSubreddit(subreddit: string, sort: Sort = Sort.Hot) {
   const [posts, setPosts] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<Error | undefined>(undefined);
@@ -78,13 +79,17 @@ export function useSubreddit(subreddit: string, sort: Sort = Sort.Best) {
 
     console.log("acc", accessToken);
 
-    fetch(`https://oauth.reddit.com/r/${subreddit}/${sort}.json?raw_json=1`, {
-      headers: {
-        Authorization: "bearer " + accessToken,
-        "User-Agent": "web:me.y2bd.luna:v0.1.0 (by /u/y2bd)"
-      },
-      method: "GET"
-    })
+    fetch(
+      `https://oauth.reddit.com/r/${subreddit}/${sort}.json?api_type=json&raw_json=1`,
+      {
+        headers: {
+          Authorization: "bearer " + accessToken,
+          "Access-Control-Allow-Origin": "*",
+          "User-Agent": "web:me.y2bd.luna:v0.1.0 (by /u/y2bd)"
+        },
+        method: "GET"
+      }
+    )
       .then(response => response.json())
       .then((json: PostListing) => {
         setPosts(json.data.children);
@@ -114,7 +119,7 @@ export function usePost(subreddit: string, article: string) {
     }
 
     fetch(
-      `https://oauth.reddit.com/r/${subreddit}/comments/${article}.json?raw_json=1`,
+      `https://oauth.reddit.com/r/${subreddit}/comments/${article}.json?api_type=json&raw_json=1`,
       {
         headers: {
           Authorization: "bearer " + accessToken,
