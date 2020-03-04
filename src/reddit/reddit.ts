@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useOAuth } from "./oauth";
 
 export interface PostListing {
   kind: "Listing";
@@ -67,12 +68,17 @@ export function useSubreddit(subreddit: string, sort: Sort = Sort.Best) {
   const [posts, setPosts] = React.useState<Post[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<Error | undefined>(undefined);
+  const { accessToken } = useOAuth();
 
   React.useEffect(() => {
     setLoading(true);
+    if (!accessToken) {
+      return;
+    }
 
-    fetch(`https://www.reddit.com/r/${subreddit}/${sort}.json?raw_json=1`, {
+    fetch(`https://oauth.reddit.com/r/${subreddit}/${sort}.json?raw_json=1`, {
       headers: {
+        Authorization: "bearer " + accessToken,
         "User-Agent": "web:me.y2bd.luna:v0.1.0 (by /u/y2bd)"
       }
     })
@@ -86,7 +92,7 @@ export function useSubreddit(subreddit: string, sort: Sort = Sort.Best) {
         setError(err);
         setLoading(false);
       });
-  }, [subreddit, sort]);
+  }, [accessToken, subreddit, sort]);
 
   return { posts, loading, error };
 }
@@ -96,14 +102,19 @@ export function usePost(subreddit: string, article: string) {
   const [replies, setReplies] = React.useState<Reply[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<Error | undefined>(undefined);
+  const { accessToken } = useOAuth();
 
   React.useEffect(() => {
     setLoading(true);
+    if (!accessToken) {
+      return;
+    }
 
     fetch(
-      `https://www.reddit.com/r/${subreddit}/comments/${article}.json?raw_json=1`,
+      `https://oauth.reddit.com/r/${subreddit}/comments/${article}.json?raw_json=1`,
       {
         headers: {
+          Authorization: "bearer " + accessToken,
           "User-Agent": "web:me.y2bd.luna:v0.1.0 (by /u/y2bd)"
         }
       }
@@ -119,7 +130,7 @@ export function usePost(subreddit: string, article: string) {
         setError(err);
         setLoading(false);
       });
-  }, [subreddit, article]);
+  }, [subreddit, article, accessToken]);
 
   return { post, replies, loading, error };
 }
