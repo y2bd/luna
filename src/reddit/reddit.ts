@@ -1,8 +1,8 @@
-import * as React from "react";
-import { useOAuth } from "./oauth";
+import * as React from 'react';
+import { useOAuth } from './oauth';
 
 export interface PostListing {
-  kind: "Listing";
+  kind: 'Listing';
   data: {
     dist: number;
     before: string | undefined;
@@ -12,7 +12,7 @@ export interface PostListing {
 }
 
 export interface Post {
-  kind: "t3";
+  kind: 't3';
   data: {
     id: string;
     name: string;
@@ -30,7 +30,7 @@ export interface Post {
 }
 
 export interface ReplyListing {
-  kind: "Listing";
+  kind: 'Listing';
   data: {
     dist: number;
     before: string | undefined;
@@ -40,7 +40,7 @@ export interface ReplyListing {
 }
 
 export interface Reply {
-  kind: "t1";
+  kind: 't1';
   data: {
     id: string;
     name: string;
@@ -60,9 +60,9 @@ export interface Reply {
 }
 
 export enum Sort {
-  Best = "best",
-  Hot = "hot",
-  New = "new"
+  Best = 'best',
+  Hot = 'hot',
+  New = 'new'
 }
 
 export function useSubreddit(subreddit: string, sort: Sort = Sort.Hot) {
@@ -77,16 +77,13 @@ export function useSubreddit(subreddit: string, sort: Sort = Sort.Hot) {
       return;
     }
 
-    console.log("acc", accessToken);
-
     fetch(
       `https://oauth.reddit.com/r/${subreddit}/${sort}?api_type=json&raw_json=1`,
       {
         headers: {
-          Authorization: "bearer " + accessToken,
-          "User-Agent": "web:me.y2bd.luna:v0.1.0 (by /u/y2bd)"
+          Authorization: 'bearer ' + accessToken
         },
-        method: "GET"
+        method: 'GET'
       }
     )
       .then(response => response.json())
@@ -118,13 +115,12 @@ export function usePost(subreddit: string, article: string) {
     }
 
     fetch(
-      `https://oauth.reddit.com/r/${subreddit}/comments/${article}?comment=&api_type=json&raw_json=1`,
+      `https://oauth.reddit.com/r/${subreddit}/comments/${article}?&api_type=json&raw_json=1`,
       {
         headers: {
-          Authorization: "bearer " + accessToken,
-          "User-Agent": "web:me.y2bd.luna:v0.1.0 (by /u/y2bd)"
+          Authorization: 'bearer ' + accessToken
         },
-        credentials: "include"
+        method: 'GET'
       }
     )
       .then(response => response.json())

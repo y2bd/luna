@@ -1,7 +1,7 @@
-import * as React from "react";
-import "./App.css";
-import { useSubreddit, Post, usePost, Reply } from "./reddit/reddit";
-import { useUrl } from "./reddit/url";
+import * as React from 'react';
+import './App.css';
+import { useSubreddit, Post, usePost, Reply } from './reddit/reddit';
+import { useUrl } from './reddit/url';
 
 function App() {
   const { subreddit, article } = useUrl();
@@ -29,8 +29,8 @@ const PostsView: React.FC<{ subreddit: string }> = ({ subreddit }) => {
 const PostView: React.FC<Post> = post => {
   const { goToArticle } = useUrl();
   const { expanded } = post;
-  const { id, permalink, url, subreddit, selftext_html } = post.data;
-  const onDivClick = React.useCallback(() => window.open(url), [permalink]);
+  const { id, url, subreddit, selftext_html } = post.data;
+  const onDivClick = React.useCallback(() => window.open(url), [url]);
 
   const onCommentClick = React.useCallback(
     (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
@@ -47,7 +47,7 @@ const PostView: React.FC<Post> = post => {
   );
 
   const domain = React.useMemo(
-    () => url.match("^https?://(?:www\\.)?(.+?)(?:/.*)?$")?.[1],
+    () => url.match('^https?://(?:www\\.)?(.+?)(?:/.*)?$')?.[1],
     [url]
   );
 
@@ -78,13 +78,13 @@ const RepliesView: React.FC<{ subreddit: string; article: string }> = ({
   const { post, replies, loading, error } = usePost(subreddit, article);
 
   React.useLayoutEffect(() => {
-    const anchors = document.querySelectorAll(".ReplyData .md a");
+    const anchors = document.querySelectorAll('.ReplyData .md a');
     anchors.forEach(elem => {
       const anchor = elem as HTMLAnchorElement;
-      anchor.target = "_blank";
+      anchor.target = '_blank';
       if (anchor.href.includes(window.location.host)) {
         anchor.href =
-          "https://reddit.com" +
+          'https://reddit.com' +
           anchor.href.slice(window.location.origin.length);
       }
     });
@@ -120,27 +120,27 @@ const ReplyView: React.FC<Reply> = reply => {
   return (
     <>
       <div
-        className={"Reply " + (isTop ? "Top " : "")}
+        className={'Reply ' + (isTop ? 'Top ' : '')}
         ref={divRef}
         onClick={(e: any) => {
           if (!hasChildren) return;
           if (
-            e.target.tagName.toLowerCase() !== "a" &&
+            e.target.tagName.toLowerCase() !== 'a' &&
             !window.getSelection()?.toString()
           )
             setExpanded(!expanded);
         }}
       >
-        <div style={{ display: "flex" }}>
+        <div style={{ display: 'flex' }}>
           {new Array(indent).fill(0).map(() => (
             <div className="Indent" />
           ))}
         </div>
         <div
           className={
-            "ReplyData " +
-            (hasChildren ? "Children " : "") +
-            (isFirst ? "First " : "")
+            'ReplyData ' +
+            (hasChildren ? 'Children ' : '') +
+            (isFirst ? 'First ' : '')
           }
         >
           <article dangerouslySetInnerHTML={{ __html: body_html }} />
